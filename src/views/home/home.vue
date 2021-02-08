@@ -2,24 +2,63 @@
   <el-container class="container">
     <el-header class="header">
       <el-row>
-        <el-col :span="4" class="top"
-          ><div class="grid-content bg-purple">
-            <img src="../../assets/img/logo.png" alt="" />
-            <span class="title"
-              >AI.
-              <i style="font-style: normal; color: pink">ADMIN</i>
+        <el-col :span="4" class="top">
+          <img src="../../assets/img/logo.png" alt="" />
+          <span style="font-size: 20px"
+            >AI.
+            <i style="font-style: normal; color: pink; font-size: 20px"
+              >ADMIN</i
+            >
+          </span>
+        </el-col>
+        <el-col :span="18" class="middle"><h2>后台管理</h2> </el-col>
+        <el-col :span="2" class="loginout">
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              <img src="../../assets/img/sxc.jpg" alt="" />
             </span>
-          </div></el-col
-        >
-        <el-col :span="16" class="middle"><h2>后台管理</h2> </el-col>
-        <el-col :span="4" class="loginout">
-          <img src="../../assets/img/sxc.jpg" alt="" />
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item icon="el-icon-s-tools" @click.native="out"
+                >退出</el-dropdown-item
+              >
+            </el-dropdown-menu>
+          </el-dropdown>
         </el-col>
       </el-row>
     </el-header>
     <el-container>
-      <el-aside width="200px" class="aside">Aside</el-aside>
-      <el-main class="main">Main</el-main>
+      <el-aside width="200px" class="aside">
+        <el-menu :router="true">
+          <!-- <el-menu-item index="1">
+            <i class="el-icon-document"></i>
+            <span slot="title">首页</span>
+          </el-menu-item> -->
+          <el-menu-item index="info">
+            <template slot="title">
+              <i class="el-icon-menu"></i>
+              <span>个人信息</span>
+            </template>
+          </el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>用户管理</span>
+            </template>
+            <el-menu-item index="user">用户列表</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="shape">
+            <i class="el-icon-document"></i>
+            <span slot="title">分享功能</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-setting"></i>
+            <span slot="title">订单管理</span>
+          </el-menu-item>
+        </el-menu></el-aside
+      >
+      <el-main class="main">
+        <router-view />
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -31,13 +70,25 @@ export default {
     return {};
   },
   components: {},
+  methods: {
+    out() {
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 
 <style>
+.top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 60px;
+}
 .top img {
-  margin-right: 5px;
-  vertical-align: middle;
+  width: 45px;
+  height: 45px;
+  margin-right: 20px;
 }
 .loginout {
   height: 60px;
@@ -46,6 +97,8 @@ export default {
   align-items: center;
 }
 .loginout img {
+  display: block;
+  cursor: pointer;
   border-radius: 50%;
   width: 45px;
   height: 45px;
@@ -53,37 +106,23 @@ export default {
 .container {
   height: 100%;
 }
-.el-header {
+.header {
   background-color: #b3c0d1;
   color: #333;
   text-align: center;
-  line-height: 60px;
+  height: 60px;
 }
-
+.middle {
+  line-height: 60px;
+  margin-left: -30px;
+}
 .el-aside {
-  background-color: #d3dce6;
+  background-color: #fff;
   color: #333;
-  text-align: center;
-  line-height: 200px;
 }
 
 .el-main {
   background-color: #e9eef3;
   color: #333;
-  text-align: center;
-  line-height: 160px;
-}
-
-body > .el-container {
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
 }
 </style>
